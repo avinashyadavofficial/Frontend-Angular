@@ -8,5 +8,10 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'custom_title_generator';
+  data={
+    title: 'Custom Title Project',
+  }
+  keyUp(newTitle: string) {
+    this.data.title = newTitle;
+  }
 }
