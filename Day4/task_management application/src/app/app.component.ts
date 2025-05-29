@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { HeaderComponent } from "./header/header.component";
 import { UserComponent } from "./user/user.component";
-
+import { DUMMY_USERS } from "./dumy-users";
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -11,5 +11,5 @@ import { UserComponent } from "./user/user.component";
   styleUrls: ['./app.component.css']  
 })
 export class AppComponent {
-  title = 'test-application';
+  users = DUMMY_USERS;
 }
