@@ -1,5 +1,10 @@
 import { Component, Input, Output, EventEmitter ,output} from '@angular/core';
 
+interface User{
+  id: string;
+  name: string;
+  avatar: string;
+};
 @Component({
   selector: 'app-user',
   imports: [],
@@ -7,17 +12,14 @@ import { Component, Input, Output, EventEmitter ,output} from '@angular/core';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  @Input({required:true}) id!:string; //
-  // The '!' operator is used to assert that the property will be initialized later
-  @Input({required:true}) avatar!:string;
-  @Input({required:true}) name!:string;
+  @Input({required:true}) user!:User;
   @Output() select=new EventEmitter();
   // select=output<string>();
   get imagePath(){
-    return '/users/'+this.avatar;
+    return '/users/'+this.user.avatar;
   }
   onSelectUser(){
-    this.select.emit(this.id);
+    this.select.emit(this.user.id);
   }
 }
  
