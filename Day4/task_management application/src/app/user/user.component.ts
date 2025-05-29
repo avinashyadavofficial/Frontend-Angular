@@ -11,8 +11,8 @@ export class UserComponent {
   // The '!' operator is used to assert that the property will be initialized later
   @Input({required:true}) avatar!:string;
   @Input({required:true}) name!:string;
-  //@Output() select=new EventEmitter();
-  select=output<string>();
+  @Output() select=new EventEmitter<string>();
+  // select=output<string>();
   get imagePath(){
     return '/users/'+this.avatar;
   }
