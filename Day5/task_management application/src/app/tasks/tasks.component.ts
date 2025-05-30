@@ -14,10 +14,13 @@ export class TasksComponent {
   @Input({required:true}) name!:string;
   @Input({required:true}) userId!:string;
   isAddingTask = false;
-  private tasksService=new TasksService();
+  // private tasksService=new TasksService(); // without Dependency injection
+  //with DI
+  constructor(tasksService:TasksService){}
+
   
 get selectedUserTasks() {
-  return  this.tasksService.getUserTasks(this.userId);
+  return 1
 } 
 onCompleteTask(id:string){
   
