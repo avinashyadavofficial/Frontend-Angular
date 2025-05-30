@@ -31,7 +31,7 @@ export class TasksService{
 getUserTasks(userId:string){
     return  this.tasks.filter(task => task.userId === userId);
 }
-addTask(userId:string,taskData:NewTaskData){
+addTask(taskData:NewTaskData,userId:string){
     this.tasks.unshift({
     id: new Date().getTime().toString(),
     userId: userId,

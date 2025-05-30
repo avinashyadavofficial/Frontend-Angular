@@ -16,22 +16,20 @@ export class TasksComponent {
   isAddingTask = false;
   // private tasksService=new TasksService(); // without Dependency injection
   //with DI
-  constructor(tasksService:TasksService){}
+  constructor(private tasksService: TasksService) {}
 
   
 get selectedUserTasks() {
-  return 1
+  return this.tasksService.getUserTasks(this.userId);
 } 
 onCompleteTask(id:string){
-  
+  return this.tasksService.removeTask(id);
 }
 onStartAddTask(){
    this.isAddingTask = true;
 }
-onCancelAddTask(){
+onCloseAddTask(){
     this.isAddingTask = false;
 }
-onAddTask(taskData:NewTaskData){
-  
-}
+
 }
