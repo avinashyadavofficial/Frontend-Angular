@@ -1,4 +1,5 @@
-import { Injectable } from "@angular/core";
+import { Injectable,Inject,PLATFORM_ID } from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
 import { NewTaskData } from "./task/task.model";
 
 @Injectable({providedIn:"root"})
@@ -27,7 +28,23 @@ export class TasksService{
       'Prepare and describe an issue template which will help with project management',
     dueDate: '2024-06-15',
   },
-] 
+];
+
+// constructor(){
+//     const tasks=localStorage.getItem('tasks');
+//     if(tasks){
+//         this.tasks=JSON.parse(tasks);
+//     }
+// }---> this works when u have put no to services while creating angular project
+
+constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      const tasks = localStorage.getItem('tasks');
+      if (tasks) {
+        this.tasks = JSON.parse(tasks);
+      }
+    }
+  }
 getUserTasks(userId:string){
     return  this.tasks.filter(task => task.userId === userId);
 }
@@ -38,9 +55,21 @@ addTask(taskData:NewTaskData,userId:string){
     title: taskData.title,
     summary: taskData.summary,
     dueDate: taskData.dueDate
-  })
+  });
+  this.saveTasks(); //Save after adding
 }
 removeTask(id:string){
    this.tasks = this.tasks.filter(task => task.id !== id);
+   this.saveTasks(); //Save after removing
 }
+// private  saveTasks(){
+//     localStorage.setItem('tasks',JSON.stringify(this.tasks))
+// }
+private saveTasks() {
+    if(isPlatformBrowser(this.platformId)){
+         localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    }
+    
+  }
+
 }
